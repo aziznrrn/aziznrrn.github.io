@@ -11,7 +11,7 @@ function registerServiceWorker() {
         return registration;
     })
     .catch((e) => {
-        console.err(e);
+        console.error(e);
     });
 }
 
