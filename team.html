@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="description" content="Goaalll">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#117cb4">
+        
+        <title>Goalll - team</title>
+
+        <link rel="manifest" href="/manifest.json">
+        <link rel="stylesheet" href="css/materialize.min.css">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    </head>
+    <body>
+
+        <nav class="blue darken-2" role="navigation">
+            <div class="nav-wrapper container">
+                <a href="#" class="brand-logo" id="logo-container">Goaalll</a>
+                <a href="./" data-target="nav-mobile">
+                    <i class="material-icons">arrow_back</i>
+                </a>
+                <ul class="topnav right hide-on-med-and-down"></ul>
+                <ul class="sidenav" id="nav-mobile"></ul>
+            </div>
+        </nav>
+
+        <div class="container" id="body-content">
+            <team-details></team-details>
+        </div>
+
+        <div class="fixed-action-btn">
+            <a class="btn-floating btn-large red" id="add-to-fav">
+                <i class="large material-icons">star</i>
+            </a>
+            <a class="btn-floating btn-large red" id="del-from-fav">
+                <i class="large material-icons">delete</i>
+            </a>
+        </div>
+
+        <script src="./js/materialize.min.js"></script>
+        <script src="./js/detailPage.js" type="module"></script>
+    </body>
+</html>
