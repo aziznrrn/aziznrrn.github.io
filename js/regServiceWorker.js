@@ -8,11 +8,10 @@ if (!('serviceWorker' in navigator)) {
 function registerServiceWorker() {
     return navigator.serviceWorker.register('sw.js')
     .then((registration) => {
-        console.log('Registrasi service worker berhasil.');
         return registration;
     })
     .catch((e) => {
-        console.err(`Registrasi service worker gagal. ${e}`);
+        console.err(e);
     });
 }
 
@@ -21,10 +20,10 @@ function requestPermission() {
         Notification.requestPermission()
         .then((result) => {
             if (result === "denied") {
-                console.log("Fitur notifikasi tidak diijinkan.");
+                console.log("notification denied.");
                 return;
             } else if (result === "default") {
-                console.error("Pengguna menutup kotak dialog permintaan ijin.");
+                console.error("notification dialog closed.");
                 return;
             }
                 
@@ -34,7 +33,7 @@ function requestPermission() {
                         userVisibleOnly: true,
                         applicationServerKey: urlBase64ToUint8Array("BBJUo_7YZfgi2DDQb4TLkAsQxCXAWVLTds3rH8P5oYcOirVmcGmU7EYwgQiyrbZi7nnYww92zESiHoIawHBikgw")
                     }).catch((e) => 
-                        console.error('Tidak dapat melakukan subscribe ', e.message)
+                        console.error(e.message)
                     );
                 });
             }

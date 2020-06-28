@@ -10,7 +10,6 @@ const addToFavorited = (favorite) => {
     dbPromised.then((db) => {
         const tx = db.transaction("favorited", "readwrite");
         const store = tx.objectStore("favorited");
-        console.log(favorite);
         store.add(favorite);
         return tx.complete;
     })
