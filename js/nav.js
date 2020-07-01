@@ -47,21 +47,19 @@ document.addEventListener("DOMContentLoaded", function() {
 		xhttp.onreadystatechange = function() {
 			if (this.readyState === 4) {
 				
-				if (page === "home") { 
+				if (page === "home")
 					getTeamList();
-				} else if (page === "favorite") { 
+				else if (page === "favorite")
 					getFavoritedTeam();
-				} else if (page === "standings") {
+				else if (page === "standings")
 					getStandingsList();
-				}
 
-				if (this.status == 200) {
+				if (this.status === 200)
 					content.innerHTML = xhttp.responseText;
-				} else if (this.status == 404) {
-					content.innerHTML = "<code>Page not found.</code>";
-				} else { 
-					content.innerHTML = "<code>Ups.. halaman tidak dapat diakses.</code>";
-				}
+				else if (this.status === 404) 
+					content.innerHTML = "<p>Page not found.</p>";
+				else
+					content.innerHTML = "<p>Ups.. anda sedang offline.</p>";
 			}
 		};
 		xhttp.open("GET", `pages/${page}.html`, true);

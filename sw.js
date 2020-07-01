@@ -1,12 +1,17 @@
 importScripts('https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js');
 
-workbox.precaching.precacheAndRoute([
-    {url: '/css/materialize.min.css', revision: 1},
-    {url: '/css/style.css', revision: 1},
-    {url: '/index.html', revision: 1},
-    {url: '/nav.html', revision: 1},
-    {url: '/manifest.json', revision: 1}
-]);
+workbox.precaching.precacheAndRoute(
+    [
+        {url: '/css/materialize.min.css', revision: 1},
+        {url: '/css/style.css', revision: 1},
+        {url: '/index.html', revision: 1},
+        {url: '/team.html', revision: 1},
+        {url: '/nav.html', revision: 1},
+        {url: '/manifest.json', revision: 1}
+    ], {
+        ignoreUrlParametersMatching: [/.*/]
+    }
+);
 
 workbox.routing.registerRoute(
     new RegExp('/pages/'),
@@ -38,13 +43,28 @@ workbox.routing.registerRoute(
                 maxEntries: 50
             })
         ]
-    })
+    }), {
+        ignoreUrlParametersMatching: [/.*/]
+    }
 );
 
 workbox.routing.registerRoute(
     new RegExp('\.js$'),
     workbox.strategies.cacheFirst({
         cacheName: 'script',
+        plugins: [
+            new workbox.expiration.Plugin({
+                maxAgeSeconds: 60 * 60 * 24 * 30,
+                maxEntries: 50
+            })
+        ]
+    })
+);
+
+workbox.routing.registerRoute(
+    new RegExp('\.png$'),
+    workbox.strategies.cacheFirst({
+        cacheName: 'images',
         plugins: [
             new workbox.expiration.Plugin({
                 maxAgeSeconds: 60 * 60 * 24 * 30,

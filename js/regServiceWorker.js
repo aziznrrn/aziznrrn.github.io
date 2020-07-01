@@ -8,10 +8,11 @@ if (!('serviceWorker' in navigator)) {
 function registerServiceWorker() {
     return navigator.serviceWorker.register('sw.js')
     .then((registration) => {
+        console.log('Registrasi service worker berhasil.');
         return registration;
     })
     .catch((e) => {
-        console.error(e);
+        console.error(`Registrasi service worker gagal. ${e}`);
     });
 }
 
@@ -23,16 +24,24 @@ function requestPermission() {
                 console.log("notification denied.");
                 return;
             } else if (result === "default") {
-                console.error("notification dialog closed.");
+                console.log("dialog box closed.");
                 return;
             }
                 
             if (('PushManager' in window)) {
-                navigator.serviceWorker.getRegistration().then((registration) => {
+                navigator.serviceWorker.getRegistration()
+                .then(registration => {
                     registration.pushManager.subscribe({
                         userVisibleOnly: true,
                         applicationServerKey: urlBase64ToUint8Array("BBJUo_7YZfgi2DDQb4TLkAsQxCXAWVLTds3rH8P5oYcOirVmcGmU7EYwgQiyrbZi7nnYww92zESiHoIawHBikgw")
-                    }).catch((e) => 
+                    }).then((subscribe) => {
+                        console.log('endpoint: ', subscribe.endpoint);
+                        console.log('p256dh key: ', btoa(String.fromCharCode.apply(
+                            null, new Uint8Array(subscribe.getKey('p256dh')))));
+                        console.log('auth key: ', btoa(String.fromCharCode.apply(
+                            null, new Uint8Array(subscribe.getKey('auth')))));
+                    })
+                    .catch((e) => 
                         console.error(e.message)
                     );
                 });

@@ -10,7 +10,6 @@ const fetchApi = url => {
         }
     })
 };
-
 const json = (response) => response.json();
 
 const getTeamList = () => {
